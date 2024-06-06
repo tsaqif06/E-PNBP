@@ -1,0 +1,30 @@
+export const dataPerjadin = {
+  id: "1791",
+  kode_tarif: "3C",
+  name: "C. Pembayaran Biaya Perjalanan Dinas untuk kegiatan diluar kantor yang dibebankan kepada Wajib Bayar dari Jasa Tindakan Karantina Hewan dan Tumbuhan",
+  satuan: "per orang per perjalanan",
+  created_at: "07/25/2023",
+  updated_at: "07/29/2023",
+  kode_dept: "018",
+  kode_pp: "2023028",
+  kode_simponi: "000684",
+  kode_level: "003003",
+  kode_tarif_mpn: "018202302800684",
+  tarif: 1,
+  kode_akun: "425699",
+  kode_tarif2: "370486",
+};
+export const dataPerjadin27 = {
+  id: "1012",
+  level: "1",
+  kd_tarif: "001012",
+  kd_level: "004",
+  parent: "0",
+  name: "E. Pembayaran Biaya Perjalanan Dinas untuk kegiatan diluar kantor yang dibebankan kepada Wajib Bayar dari Jasa Tindakan Karantina Hewan dan Tumbuhan",
+  satuan: "per orang per perjalanan",
+  jml_tarif: "1",
+  kd_akun: "425699",
+  impor: "1",
+  ekspor: "1",
+  domestik: "1"
+};
