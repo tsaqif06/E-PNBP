@@ -2,7 +2,7 @@ import { Button, Col, Container, Nav, Row } from "react-bootstrap";
 import pageSvg from "../assets/svg/security.svg";
 
 export default function Forbidden() {
-  document.body.classList.remove("sidebar-show");
+  document.body.classList.remove("sidebar-show"); 
 
   return (
     <div className="page-error">
