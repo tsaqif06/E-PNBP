@@ -62,7 +62,7 @@ const KuitansiCreate = () => {
   const { data: response, isSuccess } = useGetSertifikatPelepasDetail(id);
   const { data: { ptk = {}, ptk_komoditi = [] } = {} } = response ?? {};
   const { mutateAsync, isPending } = useAddKuitansi();
-  const { billing, isPendingBill } = useReqBilling();
+  const { mutateAsync: billing, isPendingBill } = useReqBilling();
   // const { data: increment } = useGetKuitansiIncrement(id);
   let [formOptionsData, setformOptionsData] = useState([]);
   // let [dataDokumenCantolan, setDataDokumenCantolan] = useState({
@@ -253,7 +253,8 @@ const KuitansiCreate = () => {
   const createBilling = async (idKuitansi) => {
     const dataJson = {
       id: [idKuitansi],
-      kode_upt: user?.upt?.slice(0, 2),
+      kode_upt: "10",
+      // kode_upt: user?.upt?.slice(0, 2),
       jenis_karantina: ptk?.jenis_karantina
     }
     console.log("values bill")

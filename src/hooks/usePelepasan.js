@@ -4,7 +4,7 @@ import { isEmpty } from "lodash";
 
 export const useGetSertifikatPelepas = ({ params }) => {
   return useQuery({
-    queryKey: ["list-sertifikat-pelepasan", Object.values(params)],
+    queryKey: ["list-sertifikat-pelepasan", params],
     queryFn: () => mainApi.post("/ptk/filter", params).then((res) => res.data).catch((err) => console.log(err)),
     enabled: !isEmpty(params),
     keepPreviousData: false,
