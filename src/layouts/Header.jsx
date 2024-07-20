@@ -89,8 +89,8 @@ const Header = (args, { onSkin }) => {
         <div className="sidebar-header" style={{ columnGap: 5 }}>
           <Image src="/logo.png" width={50} height={50} />
           <div className="d-flex flex-column">
-            <h4 className="fw-bold m-0">PNBP</h4>
-            <h4 className="fw-bold m-0"> Barantin</h4>
+            <h5 className="fw-bold m-0">PNBP</h5>
+            <h5 className="fw-bold m-0"> Barantin</h5>
           </div>
         </div>
         <div className="vr my-2 m-2"></div>

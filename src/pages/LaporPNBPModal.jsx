@@ -1,17 +1,23 @@
 import { Button, ModalBody, ModalHeader } from "react-bootstrap";
 import { Modal, ModalFooter } from "reactstrap";
-import { useAddReqBill } from "../hooks/useReqBill";
+import { useReqBilling } from "../hooks/useReqBill";
 
 const LaporPNBPModal = ({ isOpen, onClose, data }) => {
-  const { mutateAsync, isPending } = useAddReqBill();
+  const { mutateAsync, isPending } = useReqBilling();
   const handleSubmit = async () => {
-    const json = {
-      kuitansi: data?.map((item) => ({ id: item?.id })),
-    };
-    const response = await mutateAsync(json);
-    if (response?.status == 200) {
-      onClose();
+    let dataid = data?.map((item) => {return item?.id })
+    const dataJson = {
+      id: dataid,
+      // kode_upt: "10",
+      kode_upt: data[0]?.upt_id?.slice(0, 2),
+      jenis_karantina: data[0]?.jenis_karantina
     }
+    // console.log(dataJson)
+    const response = await mutateAsync(dataJson);
+    console.log(response)
+    // if (response?.status == 200) {
+    //   onClose();
+    // }
   };
   return (
     <form onSubmit={handleSubmit}>

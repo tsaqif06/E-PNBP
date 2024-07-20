@@ -1,21 +1,21 @@
 const dashboardMenu = [
   {
-    label: "Pembayaran PNBP",
+    label: "Kuitansi",
     link: "/",
     icon: "ri-suitcase-2-line",
   },
   {
-    label: "Permohonan Kode Billing",
+    label: "Pengajuan Billing",
     link: "/permohonan-billing",
     icon: "ri-suitcase-2-line",
   },
   {
-    label: "Status Billing ",
+    label: "Status Billing",
     link: "/kuitansi",
     icon: "ri-shopping-bag-3-line",
   },
   {
-    label: "Laporan PNBP",
+    label: "Laporan",
     link: "/payment",
     icon: "ri-shopping-bag-3-line",
   },

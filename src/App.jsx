@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./layouts/Main";
 import protectedRoutes from "./routes/ProtectedRoutes";
 import publicRoutes from "./routes/PublicRoutes";
@@ -14,7 +14,7 @@ function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route element={<Main />}>
             <Route index element={<Certificate />} />
@@ -31,7 +31,7 @@ function App() {
           })}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
       <Toaster position="top-center" />
     </QueryClientProvider>
   );
