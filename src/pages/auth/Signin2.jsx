@@ -29,21 +29,29 @@ const Signin2 = () => {
 			password: "",
 		},
 	});
-	console.log(errors);
+
 	const { mutateAsync } = useLogin();
+
 	const onSubmit = async (values) => {
-		const response = await mutateAsync(values);
-		if (response.success) {
-			navigate("/");
+		try {
+			const response = await mutateAsync(values);
+			if (response.success) {
+				navigate("/");
+			} else {
+				// alert("Login failed. Please check your username and password.");
+			}
+		} catch (error) {
+			// alert(error.message);
 		}
 	};
+
 	const isLoggedIn = localStorage.getItem("barantinToken");
 	useEffect(() => {
 		if (isLoggedIn) {
 			navigate("/");
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isLoggedIn]);
+	}, [isLoggedIn, navigate]);
+
 	return (
 		<div className="page-sign d-block py-0">
 			<SEO title="Login" />
@@ -101,4 +109,5 @@ const Signin2 = () => {
 		</div>
 	);
 };
+
 export default Signin2;
