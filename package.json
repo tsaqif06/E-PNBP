@@ -63,7 +63,7 @@
     "react-leaflet": "^4.2.1",
     "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^6.22.0",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^3.0.1",
     "react-select": "^5.8.0",
     "reactstrap": "^9.2.2",
     "remixicon-react": "^1.0.0",
@@ -84,6 +84,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
+    "vite": "^5.3.4"
   }
 }
