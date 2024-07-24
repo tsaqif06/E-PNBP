@@ -2,201 +2,165 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import userAvatar from "../assets/img/img1.jpg";
-import { Col, Image, Row } from "react-bootstrap";
-import { Button } from "reactstrap";
+import { Image, Button } from "react-bootstrap";
 import { dashboardMenu } from "../data/Menu";
 
 const Header = (args, { onSkin }) => {
-  // eslint-disable-next-line react/display-name
-  const CustomToggle = React.forwardRef(function ({ children, onClick }, ref) {
-    return (
-      <Link
-        to=""
-        ref={ref}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick(e);
-        }}
-        className="dropdown-link"
-      >
-        {children}
-      </Link>
-    );
-  });
+	const CustomToggle = React.forwardRef(function ({ children, onClick }, ref) {
+		return (
+			<Link
+				to=""
+				ref={ref}
+				onClick={(e) => {
+					e.preventDefault();
+					onClick(e);
+				}}
+				className="dropdown-link"
+			>
+				{children}
+			</Link>
+		);
+	});
 
-  const skinMode = (e) => {
-    e.preventDefault();
-    e.target.classList.add("active");
+	const navigate = useNavigate();
+	const logout = () => {
+		localStorage.clear();
+		navigate("/login");
+	};
+	const { pathname } = useLocation();
+	const user = JSON.parse(localStorage.getItem("user"));
 
-    let node = e.target.parentNode.firstChild;
-    while (node) {
-      if (node !== e.target && node.nodeType === Node.ELEMENT_NODE)
-        node.classList.remove("active");
-      node = node.nextElementSibling || node.nextSibling;
-    }
+	return (
+		<div
+			style={{
+				width: "100%",
+			}}
+		>
+			{/* Bagian atas header */}
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "center",
+					padding: "10px 20px",
+				}}
+			>
+				<div style={{ display: "flex", alignItems: "center" }}>
+					<Image src="/logo.png" width={50} height={50} />
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							marginLeft: "10px",
+						}}
+					>
+						<h5 style={{ fontWeight: "bold", margin: 0 }}>PNBP</h5>
+						<h5 style={{ fontWeight: "bold", margin: 0 }}>Barantin</h5>
+					</div>
+					<div className="vr my-2 m-2"></div>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							marginLeft: "10px",
+						}}
+					>
+						<h5 style={{ margin: 0 }}>UPT Induk</h5>
+						<h6 style={{ margin: 0 }}>
+							Balai Besar Uji Standar Karantina Hewan
+						</h6>
+					</div>
+				</div>
+				<Dropdown align="end">
+					<Dropdown.Toggle as={CustomToggle}>
+						<div style={{ display: "flex", alignItems: "center" }}>
+							<h5 onClick={logout} style={{ margin: 0, marginRight: "30px", color: "black" }}>
+								LogOut
+							</h5>
+							<div
+								style={{
+									borderRadius: "50%",
+									overflow: "hidden",
+									width: "40px",
+									height: "40px",
+								}}
+							>
+								<img
+									src={userAvatar}
+									alt="User Avatar"
+									style={{ width: "100%", height: "100%" }}
+								/>
+							</div>
+						</div>
+					</Dropdown.Toggle>
+					<Dropdown.Menu style={{ marginTop: "10px", textAlign: "center" }}>
+						<div style={{ textAlign: "center" }}>
+							<div
+								style={{
+									borderRadius: "50%",
+									overflow: "hidden",
+									marginBottom: "10px",
+									width: "60px",
+									margin: "0 auto",
+								}}
+							>
+								<img
+									src={userAvatar}
+									alt=""
+									style={{ width: "100%", height: "100%" }}
+								/>
+							</div>
+							<h5
+								style={{
+									marginBottom: "10px",
+									color: "#000",
+									fontWeight: "600",
+								}}
+							>
+								{user?.name}
+							</h5>
+							<p style={{ fontSize: "14px", color: "#6c757d" }}>
+								{user?.upt ?? "-"}
+							</p>
+							<hr />
+							<nav style={{ display: "flex", flexDirection: "column" }}>
+								<Link to="/profile" style={{ marginBottom: "10px" }}>
+									<i className="ri-user-settings-line"></i> Account Settings
+								</Link>
+								<Button
+									onClick={() => logout()}
+									style={{ display: "block", width: "100%" }}
+								>
+									<i className="ri-logout-box-r-line"></i> Log Out
+								</Button>
+							</nav>
+						</div>
+					</Dropdown.Menu>
+				</Dropdown>
+			</div>
 
-    let skin = e.target.textContent.toLowerCase();
-    let HTMLTag = document.querySelector("html");
-
-    if (skin === "dark") {
-      HTMLTag.setAttribute("data-skin", skin);
-      localStorage.setItem("skin-mode", skin);
-
-      onSkin(skin);
-    } else {
-      HTMLTag.removeAttribute("data-skin");
-      localStorage.removeItem("skin-mode");
-
-      onSkin("");
-    }
-  };
-
-  const sidebarSkin = (e) => {
-    e.preventDefault();
-    e.target.classList.add("active");
-
-    let node = e.target.parentNode.firstChild;
-    while (node) {
-      if (node !== e.target && node.nodeType === Node.ELEMENT_NODE)
-        node.classList.remove("active");
-      node = node.nextElementSibling || node.nextSibling;
-    }
-
-    let skin = e.target.textContent.toLowerCase();
-    let HTMLTag = document.querySelector("html");
-
-    HTMLTag.removeAttribute("data-sidebar");
-
-    if (skin !== "default") {
-      HTMLTag.setAttribute("data-sidebar", skin);
-      localStorage.setItem("sidebar-skin", skin);
-    } else {
-      localStorage.removeItem("sidebar-skin", skin);
-    }
-  };
-  const navigate = useNavigate();
-  const logout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
-  const { pathname } = useLocation();
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  console.log(user);
-  return (
-    <div className="w-100">
-      <div className="header-main mx-3 mx-lg-4">
-        <div className="sidebar-header" style={{ columnGap: 5 }}>
-          <Image src="/logo.png" width={50} height={50} />
-          <div className="d-flex flex-column">
-            <h5 className="fw-bold m-0">PNBP</h5>
-            <h5 className="fw-bold m-0"> Barantin</h5>
-          </div>
-        </div>
-        <div className="vr my-2 m-2"></div>
-        <div className="h-200">
-          <div className="d-flex h-100 align-items-center">
-            {dashboardMenu?.map((item, idx) => {
-              const active =
-                pathname == item.link
-                  ? "bg-warning h-80 d-inline-block"
-                  : "";
-              return (
-                <div key={idx} className={active}>
-                  <Link className={"px-3 text-dark fw-bold"} key={idx} to={item?.link}>
-                    {item?.label}
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className="vr my-2 m-2"></div>
-        <div className="me-auto ">
-          <h5>UPT Induk</h5>
-          <h6>Balai Besar Uji Standar Karantina Hewan, Ikan, dan Tumbuhan</h6>
-        </div>
-        <Dropdown className="dropdown-skin" align="end">
-          <Dropdown.Menu className="mt-10-f">
-            <label>Skin Mode</label>
-            <nav className="nav nav-skin">
-              <Link
-                onClick={skinMode}
-                className={
-                  localStorage.getItem("skin-mode")
-                    ? "nav-link"
-                    : "nav-link active"
-                }
-              >
-                Light
-              </Link>
-              <Link
-                className={
-                  localStorage.getItem("skin-mode")
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-              >
-                Dark
-              </Link>
-            </nav>
-            <hr />
-            <label>Sidebar Skin</label>
-            <nav id="sidebarSkin" className="nav nav-skin">
-              <Link
-                onClick={sidebarSkin}
-                className={
-                  !localStorage.getItem("sidebar-skin")
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-              >
-                Default
-              </Link>
-
-              <Link
-                onClick={sidebarSkin}
-                className={
-                  localStorage.getItem("sidebar-skin") === "dark"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-              >
-                Dark
-              </Link>
-            </nav>
-          </Dropdown.Menu>
-        </Dropdown>
-
-        <Dropdown className="dropdown-profile ms-3 ms-xl-4" align="end">
-          <Dropdown.Toggle as={CustomToggle}>
-            <div className="avatar online">
-              <img src={userAvatar} alt="" />
-            </div>
-          </Dropdown.Toggle>
-          <Dropdown.Menu className="mt-10-f">
-            <div className="dropdown-menu-body">
-              <div className="avatar avatar-xl online mb-3">
-                <img src={userAvatar} alt="" />
-              </div>
-              <h5 className="mb-1 text-dark fw-semibold">{user?.name}</h5>
-              <p className="fs-sm text-secondary">{user?.upt ?? "-"}</p>
-
-              <nav className="nav"></nav>
-              <hr />
-              <nav className="nav">
-                <Link to="/profile">
-                  <i className="ri-user-settings-line"></i> Account Settings
-                </Link>
-                <Button onClick={() => logout()}>
-                  <i className="ri-logout-box-r-line"></i> Log Out
-                </Button>
-              </nav>
-            </div>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
-    </div>
-  );
+			{/* Bagian bawah header */}
+			<div style={{ marginLeft: "10px", marginTop: "10px" }}>
+				{dashboardMenu?.map((item, idx) => {
+					const active = pathname === item.link ? "#ffc107" : "#000";
+					return (
+						<Link
+							key={idx}
+							to={item?.link}
+							style={{
+								padding: "10px 20px",
+								textDecoration: "none",
+								color: active,
+								fontWeight: "bold",
+							}}
+						>
+							{item?.label}
+						</Link>
+					);
+				})}
+			</div>
+		</div>
+	);
 };
+
 export default Header;
