@@ -58,7 +58,7 @@ const Certificate = () => {
     jenis_karantina: selectedMenu,
     jenis_dokumen: "PTK",
     upt_id: user?.upt ?? "",
-    kode_satpel: "1000",
+    kode_satpel: "3600",
   };
 
   //persiapan
